@@ -1,0 +1,148 @@
+<div class="h-[100%] min-h-[100vh] pt-5 bg-slate-200">
+    <div *ngIf="loading" class="flex items-center align-middle text-center">
+        <div class="rounded-md w-[100%] mt-4 ps-4 pe-4">
+            <div class="animate-pulse flex space-x-4">
+              <div class="flex-1 space-y-6 py-1">
+                <div class="space-y-3">
+                  <div class="grid grid-cols-3 gap-4">
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+
+                    <div class="h-10 bg-slate-500 rounded col-span-2"></div>
+                    <div class="h-10 bg-slate-500 rounded col-span-1"></div>
+                  </div>
+                  <div class="h-10 bg-slate-500 rounded"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div> 
+<table  class="table-auto m-5 mt-0 p-5 w-[97%] ">
+    <thead class="ms-5 pt-5  text-left " *ngIf="!loading">
+        <tr class=""><th class="ms-5 text-left"></th>
+          <th class="ms-5 text-left">ID</th>
+            <th class="ms-5 text-left">Economic ID  &nbsp;<a (click)="sortEconomic('asc')" class="cursor-pointer text-black hover:decoration-black"><i class="fa-solid fa-sort"></i></a></th>
+            <th class="ms-5 text-left">Key field  </th>
+            <th class="ms-5 text-left">Name  &nbsp; <a (click)="sortName()" class="cursor-pointer text-black hover:decoration-black"><i class="fa-solid fa-sort"></i></a></th>
+            <th class="ms-5 text-left">Region</th>
+            <th class="ms-5 text-left">Date &nbsp;<i class="fa-solid fa-sort"></i>  </th></tr>
+    </thead>
+    <tbody class="bg-white border" *ngIf="!loading">
+       
+           <tr  *ngFor="let item of list"> 
+            <td class="ms-5"><input [appHighlight]="color" type="checkbox" class="rounded-sm bg-slate-200 selection:bg-slate-400"/></td>
+            <td class="ms-5">{{item.id}}</td><td class="ms-5">{{item.econimic}}</td> <td class="ms-5">{{item.keyfield}}</td>
+           
+            <td class="ms-5">{{item.Name}}</td>
+            <td class="ms-5">{{item.Region}}</td>
+            <td class="ms-5">{{item.Date}}</td>
+            <td class="ms-5 text-right"><button class="rounded-sm text-white bg-slate-500 p-2 hover:bg-slate-950 cursor-pointer shadow-md" (click)="show(item)">Edit</button></td></tr>
+        
+    </tbody>
+</table>
+
+
+<div class="container mx-auto">
+  <ul>
+    <li [style.background-color]="(currentPage==(num+1))?'#73c7af':''" class="inline-block bg-slate-400 shadow-md p-3" *ngFor=" let num of pageArray()"><a class="cursor-pointer decoration-black hover:decoration-black " (click)="navigate(num+1)">{{num+1}}</a></li>
+  </ul>
+</div>
+<div *ngIf="showModal" class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50  outline-none focus:outline-none justify-center items-center flex">
+  <div class="relative w-auto my-6 mx-auto max-w-6xl">
+    <!--content-->
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+      <!--header-->
+      <div class="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+        <h3 class="text-3xl font-semibold">
+          {{selected.Name | uppercase}}
+        </h3>
+        <button class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none" (click)="hideModal()">
+          <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+            ×
+          </span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="relative p-6 flex-auto">
+        <div class="border-b border-gray-900/10 pb-12">
+          <h2 class="text-base font-semibold leading-7 text-gray-900">Personal Information</h2>
+          <p class="mt-1 text-sm leading-6 text-gray-600">Use a permanent address where you can receive mail.</p>
+          <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <div class="sm:col-span-3">
+              <label for="first-name" class="block text-sm font-medium leading-6 text-gray-900">Name</label>
+              <div class="mt-2">
+                <input type="text" name="first-name" id="first-name" [(ngModel)]="selected.Name" autocomplete="given-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2">
+              </div>
+            </div>
+    
+            <div class="sm:col-span-3">
+              <label for="last-name" class="block text-sm font-medium leading-6 text-gray-900">Region</label>
+              <div class="mt-2">
+                <input type="text" name="last-name" id="last-name" autocomplete="family-name" [(ngModel)]="selected.Region" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2">
+              </div>
+            </div>
+    
+            <div class="sm:col-span-4">
+              <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Date</label>
+              <div class="mt-2">
+                <input id="email" name="email" type="text" autocomplete="email" [(ngModel)]="selected.Date" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2">
+              </div>
+            </div>
+    
+            <div class="sm:col-span-3">
+              <label for="country" class="block text-sm font-medium leading-6 text-gray-900">Economic Id</label>
+              <div class="mt-2">
+                <input id="email" name="econimic" type="text" autocomplete="email" [(ngModel)]="selected.econimic" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 p-2">
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+        <button class="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button" (click)="hideModal()">
+          Close
+        </button>
+        <button 
+          class="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" 
+          type="button" 
+          >
+          Save Changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+</div>
